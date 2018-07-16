@@ -1,0 +1,32 @@
+<aura:component implements="force:appHostable" access="global" controller="TestReactContainerController">
+
+    <aura:attribute type="List" name="moves" default="[]" />
+
+    <lightning:card title="Lightning Container + React POC">
+        <lightning:layout horizontalAlign="center" class="container">
+            <lightning:layoutitem size="3" class="slds-p-around_small slds-border_top slds-border_bottom slds-border_right slds-border_left">
+                <lightning:formattedText value="React App area" class="slds-text-heading_small" />
+                <lightning:container aura:id="reactApp" src="{!$Resource.react + '/index.html'}" onmessage="{!c.handleMessage}" onerror="{!c.handleError}"
+                />
+            </lightning:layoutitem>
+            <lightning:layoutitem size="3" class="slds-p-around_small slds-border_top slds-border_bottom slds-border_right slds-border_left">
+                <lightning:layout horizontalAlign="spread">
+                    <lightning:layoutitem>
+                        <lightning:formattedText value="Lightning Component area" class="slds-text-heading_small" />
+                    </lightning:layoutitem>
+                    <lightning:layoutitem>
+                        <lightning:button variant="brand" label="Reset game" title="Reset game" onclick="{! c.handleResetGame }" />
+                    </lightning:layoutitem>
+                </lightning:layout>
+                <p>
+                    <lightning:formattedText value="Received messages:" />
+                </p>
+                <aura:iteration items="{!v.moves}" var="move">
+                    <p>
+                        <lightning:formattedText value="{!move}" />
+                    </p>
+                </aura:iteration>
+            </lightning:layoutitem>
+        </lightning:layout>
+    </lightning:card>
+</aura:component>
